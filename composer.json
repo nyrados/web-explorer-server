@@ -1,0 +1,22 @@
+{
+    "name": "nyrados/web-explorer-api",
+    "version": "0.1",
+    "description": "Backend Server for WebExplorer",
+    "require": {
+        "php": "^7.2",
+        "nyrados/file-utils": "^0.1.1",
+        "psr/http-message": "^1.0",
+        "psr/http-server-middleware": "^1.0",
+        "guzzlehttp/psr7": "^1.6",
+        "nyrados/http-utils": "^0.1.0",
+        "psr/http-server-handler": "^1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9"
+    },
+    "autoload": {
+        "psr-4": {
+            "Nyrados\\WebExplorer\\": "src/"
+        }
+    }
+}
