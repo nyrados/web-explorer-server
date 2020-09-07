@@ -27,6 +27,12 @@ abstract class AbstractMiddleware implements MiddlewareInterface
      */
     protected $we;
 
+    /**
+     * @var ResponseInterface
+     */
+    protected $response;
+
+
     public function __construct(WebExplorer $explorer)
     {
         $this->file = $explorer->getBaseFile();
@@ -35,9 +41,11 @@ abstract class AbstractMiddleware implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $response = $handler->handle($request);
+        $this->request = $request;
+        $this->response = $handler->handle($request);
 
-        $body = $response->getBody();
+
+        $body = $this->response->getBody();
         if (!$body->isWritable()) {
             throw new RuntimeException('WebExplorer requires a writeable Body');
         }
@@ -45,7 +53,7 @@ abstract class AbstractMiddleware implements MiddlewareInterface
         $body->rewind();
 
         if (strtoupper($request->getMethod()) !== self::$method) {
-            return $this->error($response, ['error' => 'invalid_method'])
+            return $this->error($this->response, ['error' => 'invalid_method'])
                 ->withStatus(405)
                 ->withHeader('Allow', self::$method);
         }
@@ -57,28 +65,28 @@ abstract class AbstractMiddleware implements MiddlewareInterface
 
         foreach (array_merge(self::$params, ['file']) as $name) {
             if (!isset($param[$name])) {
-                return $this->error($response, ['error' => 'missing_parameter'])
+                return $this->error($this->response, ['error' => 'missing_parameter'])
                     ->withStatus(422);
             }
         }
 
 
-        $target = (new Path($param['file']))->asRelative();
+        $target = (new Path(urldecode($param['file'])))->asRelative();
         $file = $this->file->withPath($target->getPath());
 
         try {
             $runResponse = $this->run($file, $param);
         } catch (FileException $e) {
-            return $this->error($response, $this->handleFileException($e, $param['file']));
+            return $this->error($this->response, $this->handleFileException($e, $param['file']));
         }
         
 
         if (is_array($runResponse)) {
-            $body = $response->getBody();
+            $body = $this->response->getBody();
             $body->rewind();
             $body->write(json_encode($runResponse, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
             
-            return $response
+            return $this->response
                 ->withBody($body)
                 ->withHeader('Content-Type', 'application/json');
         }

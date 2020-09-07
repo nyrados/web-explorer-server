@@ -4,6 +4,7 @@ namespace Nyrados\WebExplorer\Middleware\Selector;
 
 use Nyrados\WebExplorer\Middleware\DefaultMiddleware;
 use Nyrados\WebExplorer\Middleware\DirectoryList;
+use Nyrados\WebExplorer\Middleware\FileView;
 use Nyrados\WebExplorer\WebExplorer;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -16,9 +17,9 @@ class QueryActionSelector implements MiddlewareSelectorInterface
     private $we;
 
     public const MIDDLEWARES = [
-        'list' => DirectoryList::class
+        'list' => DirectoryList::class,
+        'view' => FileView::class
     ];
-        
 
     public function __construct(WebExplorer $we)
     {

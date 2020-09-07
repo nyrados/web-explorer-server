@@ -9,7 +9,8 @@
         "psr/http-server-middleware": "^1.0",
         "guzzlehttp/psr7": "^1.6",
         "nyrados/http-utils": "^0.1.0",
-        "psr/http-server-handler": "^1.0"
+        "psr/http-server-handler": "^1.0",
+        "league/mime-type-detection": "^1.4"
     },
     "require-dev": {
         "phpunit/phpunit": "^9"

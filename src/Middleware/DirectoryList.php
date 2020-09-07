@@ -20,7 +20,6 @@ class DirectoryList extends AbstractMiddleware
             }
         }
 
-
         return $rs;
     }
 
@@ -42,8 +41,10 @@ class DirectoryList extends AbstractMiddleware
     {
         $stat = $file->stat();
         $data = [
+            'mime' => $file->getMimeType(),
             'type' => 'file',
-            'size' => $stat['size']
+            'size' => $stat['size'],
+            'extension' => ''
         ];
 
         return $data;

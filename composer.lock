@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5e445e74277a6109679affc2ea54ccd8",
+    "content-hash": "fc0cbf82144e24cbcfdd1a7d7ae3f832",
     "packages": [
         {
             "name": "guzzlehttp/psr7",
@@ -78,6 +78,57 @@
             "time": "2019-07-01T23:21:34+00:00"
         },
         {
+            "name": "league/mime-type-detection",
+            "version": "1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/mime-type-detection.git",
+                "reference": "fda190b62b962d96a069fcc414d781db66d65b69"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/mime-type-detection/zipball/fda190b62b962d96a069fcc414d781db66d65b69",
+                "reference": "fda190b62b962d96a069fcc414d781db66d65b69",
+                "shasum": ""
+            },
+            "require": {
+                "ext-fileinfo": "*",
+                "php": "^7.2 || ^8.0"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^0.12.36",
+                "phpunit/phpunit": "^8.5.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "League\\MimeTypeDetection\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Frank de Jonge",
+                    "email": "info@frankdejonge.nl"
+                }
+            ],
+            "description": "Mime-type detection for Flysystem",
+            "funding": [
+                {
+                    "url": "https://github.com/frankdejonge",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/league/flysystem",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-08-09T10:34:01+00:00"
+        },
+        {
             "name": "nyrados/file-utils",
             "version": "0.1.1",
             "source": {
@@ -111,21 +162,23 @@
         },
         {
             "name": "nyrados/http-utils",
-            "version": "0.1.1",
+            "version": "0.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nyrados/http-utils.git",
-                "reference": "04754501713a25a3b989dcab3b3891220de1715a"
+                "reference": "19bb0e4f5af6e24bdd1d1231d422a3bca45d1d6c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nyrados/http-utils/zipball/04754501713a25a3b989dcab3b3891220de1715a",
-                "reference": "04754501713a25a3b989dcab3b3891220de1715a",
+                "url": "https://api.github.com/repos/nyrados/http-utils/zipball/19bb0e4f5af6e24bdd1d1231d422a3bca45d1d6c",
+                "reference": "19bb0e4f5af6e24bdd1d1231d422a3bca45d1d6c",
                 "shasum": ""
             },
             "require": {
+                "guzzlehttp/psr7": "^1.6",
                 "php": "^7.2",
-                "psr/http-message": "^1.0"
+                "psr/http-message": "^1.0",
+                "psr/http-server-middleware": "^1.0"
             },
             "type": "library",
             "autoload": {
@@ -135,7 +188,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "description": "Basic Utils for working with HTTP in PHP",
-            "time": "2020-09-06T11:53:01+00:00"
+            "time": "2020-09-07T15:12:17+00:00"
         },
         {
             "name": "psr/http-factory",
@@ -877,16 +930,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "9.1.7",
+            "version": "9.1.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "2ef92bec3186a827faf7362ff92ae4e8ec2e49d2"
+                "reference": "f98f8466126d83b55b924a94d2244c53c216b8fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/2ef92bec3186a827faf7362ff92ae4e8ec2e49d2",
-                "reference": "2ef92bec3186a827faf7362ff92ae4e8ec2e49d2",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/f98f8466126d83b55b924a94d2244c53c216b8fb",
+                "reference": "f98f8466126d83b55b924a94d2244c53c216b8fb",
                 "shasum": ""
             },
             "require": {
@@ -946,7 +999,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-09-03T07:09:19+00:00"
+            "time": "2020-09-07T08:07:10+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
