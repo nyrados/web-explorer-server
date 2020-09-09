@@ -2,7 +2,10 @@
 
 namespace Nyrados\WebExplorer\Middleware\Selector;
 
+use Nyrados\WebExplorer\Middleware\CreateDir;
+use Nyrados\WebExplorer\Middleware\CreateFile;
 use Nyrados\WebExplorer\Middleware\DefaultMiddleware;
+use Nyrados\WebExplorer\Middleware\Delete;
 use Nyrados\WebExplorer\Middleware\DirectoryList;
 use Nyrados\WebExplorer\Middleware\FileView;
 use Nyrados\WebExplorer\WebExplorer;
@@ -18,7 +21,10 @@ class QueryActionSelector implements MiddlewareSelectorInterface
 
     public const MIDDLEWARES = [
         'list' => DirectoryList::class,
-        'view' => FileView::class
+        'view' => FileView::class,
+        'delete' => Delete::class,
+        'create_file' => CreateFile::class,
+        'create_dir' => CreateDir::class
     ];
 
     public function __construct(WebExplorer $we)

@@ -117,6 +117,7 @@ abstract class AbstractMiddleware implements MiddlewareInterface
 
         return $response
             ->withBody($body)
+            ->withStatus(400)
             ->withHeader('Content-Type', 'application/json');
     }
 

@@ -2,10 +2,8 @@
 
 namespace Nyrados\WebExplorer\Middleware;
 
-use Nyrados\Utils\File\Exception\FileAlreadyExistsException;
 use Nyrados\Utils\File\File;
 use Nyrados\Utils\File\Path;
-use Nyrados\WebExplorer\Entity\FileEntity;
 
 class DirectoryList extends AbstractMiddleware
 {
