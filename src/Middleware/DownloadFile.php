@@ -12,13 +12,9 @@ class DownloadFile extends AbstractMiddleware
         $view = new FileView($this->we);
         $response = $view->process($this->request, new ResponseHandler($this->response));
 
-        
-
         if ( ((string) $response->getStatusCode())[0] !== '2') {
             return $response;
         }
-
-        var_dump($response->getStatusCode());
 
         return $response->withHeader('Content-Disposition', 'attachment; filename="' . $file->getName() . '"');
     }

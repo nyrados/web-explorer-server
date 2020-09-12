@@ -38,11 +38,13 @@ class DirectoryList extends AbstractMiddleware
     private function buildFileEntity(File $file): array
     {
         $stat = $file->stat();
+        $split = explode('.', $file->getName());
+
         $data = [
             'mime' => $file->getMimeType(),
             'type' => 'file',
             'size' => $stat['size'],
-            'extension' => ''
+            'extension' => array_pop($split)
         ];
 
         return $data;

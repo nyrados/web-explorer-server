@@ -2,6 +2,7 @@
 
 namespace Nyrados\WebExplorer\Middleware\Selector;
 
+use Nyrados\WebExplorer\Middleware\Copy;
 use Nyrados\WebExplorer\Middleware\CreateDir;
 use Nyrados\WebExplorer\Middleware\CreateFile;
 use Nyrados\WebExplorer\Middleware\DefaultMiddleware;
@@ -28,7 +29,8 @@ class QueryActionSelector implements MiddlewareSelectorInterface
         'create_file' => CreateFile::class,
         'create_dir' => CreateDir::class,
         'download' => DownloadFile::class,
-        'rename' => Rename::class
+        'rename' => Rename::class,
+        'copy' => Copy::class
     ];
 
     public function __construct(WebExplorer $we)
