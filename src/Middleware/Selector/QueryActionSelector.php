@@ -7,7 +7,9 @@ use Nyrados\WebExplorer\Middleware\CreateFile;
 use Nyrados\WebExplorer\Middleware\DefaultMiddleware;
 use Nyrados\WebExplorer\Middleware\Delete;
 use Nyrados\WebExplorer\Middleware\DirectoryList;
+use Nyrados\WebExplorer\Middleware\DownloadFile;
 use Nyrados\WebExplorer\Middleware\FileView;
+use Nyrados\WebExplorer\Middleware\Rename;
 use Nyrados\WebExplorer\WebExplorer;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -24,7 +26,9 @@ class QueryActionSelector implements MiddlewareSelectorInterface
         'view' => FileView::class,
         'delete' => Delete::class,
         'create_file' => CreateFile::class,
-        'create_dir' => CreateDir::class
+        'create_dir' => CreateDir::class,
+        'download' => DownloadFile::class,
+        'rename' => Rename::class
     ];
 
     public function __construct(WebExplorer $we)

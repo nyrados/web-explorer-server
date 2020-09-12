@@ -1,25 +1,18 @@
 <?php
 namespace Nyrados\WebExplorer;
 
-use GuzzleHttp\Psr7\ServerRequest;
-use Nyrados\Utils\File\Exception\FileAlreadyExistsException;
-use Nyrados\Utils\File\Exception\FileException;
+use Nyrados\Utils\File\File;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\RequestHandlerInterface;
+use Nyrados\WebExplorer\Middleware\DirectoryList;
 use Nyrados\Utils\File\Exception\FileNotFoundException;
 use Nyrados\Utils\File\Exception\FileNotReadableException;
 use Nyrados\Utils\File\Exception\FileNotWriteableException;
-use Nyrados\Utils\File\File;
-use Nyrados\WebExplorer\Endpoint\ListEndpoint;
-use Nyrados\WebExplorer\Middleware\DirectoryList;
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Server\MiddlewareInterface;
-use Psr\Http\Server\RequestHandlerInterface;
-use RuntimeException;
-use Nyrados\WebExplorer\Middleware\Selector\MiddlewareSelectorInterface;
+use Nyrados\Utils\File\Exception\FileAlreadyExistsException;
 use Nyrados\WebExplorer\Middleware\Selector\QueryActionSelector;
-use Throwable;
-
-use function PHPUnit\Framework\returnSelf;
+use Nyrados\WebExplorer\Middleware\Selector\MiddlewareSelectorInterface;
 
 class WebExplorer implements MiddlewareInterface
 {

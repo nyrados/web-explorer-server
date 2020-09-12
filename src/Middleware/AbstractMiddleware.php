@@ -63,16 +63,14 @@ abstract class AbstractMiddleware implements MiddlewareInterface
             : $request->getParsedBody()
         ;
 
-        foreach (array_merge(self::$params, ['file']) as $name) {
+        foreach (array_merge(static::$params, ['file']) as $name) {
+
             if (!isset($param[$name])) {
                 return $this->error($this->response, ['error' => 'missing_parameter'])
                     ->withStatus(422);
             }
         }
-
-
-        $target = (new Path(urldecode($param['file'])))->asRelative();
-        $file = $this->file->withPath($target->getPath());
+        $file = $this->getAbsoluteFile($param['file']);
 
         try {
             $runResponse = $this->run($file, $param);
@@ -98,7 +96,14 @@ abstract class AbstractMiddleware implements MiddlewareInterface
         throw new RuntimeException(static::class . '::run() must return an array or an response');
     }
 
-    private function handleFileException(FileException $e, string $file): array
+    protected function getAbsoluteFile(string $path)
+    {
+        $file = new Path(urldecode($path));
+    
+        return $this->file->withPath($file->asRelative()->getPath());
+    }
+
+    private function handleFileException(FileException $e): array
     {
         $target = substr($e->getFilename(), strlen($this->file->getPath()));
 

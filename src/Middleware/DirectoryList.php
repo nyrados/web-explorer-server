@@ -21,7 +21,7 @@ class DirectoryList extends AbstractMiddleware
         return $rs;
     }
 
-    public function buildEntity(File $file, string $location)
+    public function buildEntity(File $file, string $location): array
     {
         return array_merge(
             [
@@ -35,7 +35,7 @@ class DirectoryList extends AbstractMiddleware
         );
     }
 
-    private function buildFileEntity(File $file)
+    private function buildFileEntity(File $file): array
     {
         $stat = $file->stat();
         $data = [
@@ -48,34 +48,10 @@ class DirectoryList extends AbstractMiddleware
         return $data;
     }
 
-    private function buildDirectoryEntity(File $file)
+    private function buildDirectoryEntity(File $file): array
     {
         return [
             'type' => 'dir'
         ];
     }
-
-    /*
-    public function run(string $directory): void
-    {
-        $directory = $this->getAbsoluteFile($directory);
-        $targetPath = substr($directory->getPath(), strlen($this->file->getPath()));
-
-        if ($targetPath === '') {
-            $targetPath = '/';
-        }
-
-        $target = $directory->withPath($targetPath);
-
-        $rs = [];
-
-        foreach ($directory->getChildren() as $child) {
-            var_dump($target->withPath($child->getName()));
-
-            $rs[] = (new FileEntity($child, $target->withPath($child->getName())))->jsonSerialize();
-        }
-
-        var_dump($rs);
-    }
-    */
 }
