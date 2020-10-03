@@ -7,8 +7,8 @@ use Nyrados\Utils\File\Path;
 
 class DirectoryList extends AbstractMiddleware
 {
-    protected static $method = 'POST';
-    
+    protected static $method = 'GET';
+
     public function run(File $file, array $params = [])
     {
         $file->assertIsDirectory();
