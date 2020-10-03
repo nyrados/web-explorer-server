@@ -10,6 +10,8 @@ use function GuzzleHttp\Psr7\stream_for;
 
 class FileView extends AbstractMiddleware
 {
+    protected static $method = 'GET';
+    
     public function run(File $file, array $params = [])
     {
         $file->assertIsFile();

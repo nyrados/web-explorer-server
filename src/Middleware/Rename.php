@@ -6,7 +6,6 @@ use Nyrados\Utils\File\File;
 
 class Rename extends AbstractMiddleware
 {
-
     protected static $params = ['to'];
 
     public function run(File $file, array $params = [])

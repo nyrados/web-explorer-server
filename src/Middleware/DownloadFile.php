@@ -7,6 +7,8 @@ use Nyrados\Utils\File\File;
 
 class DownloadFile extends AbstractMiddleware
 {
+    protected static $method = 'GET';
+
     public function run(File $file, array $params = [])
     {
         $view = new FileView($this->we);

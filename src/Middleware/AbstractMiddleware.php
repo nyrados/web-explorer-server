@@ -15,7 +15,7 @@ use RuntimeException;
 abstract class AbstractMiddleware implements MiddlewareInterface
 {
     protected static $params = [];
-    protected static $method = 'GET';
+    protected static $method = 'POST';
 
     /**
      * @var File
