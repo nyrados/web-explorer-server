@@ -2,6 +2,7 @@
 
 namespace Nyrados\WebExplorer\Middleware;
 
+use Nyrados\Http\Utils\Middleware\InvokeableMiddlewareTrait;
 use Nyrados\Utils\File\Exception\FileException;
 use Nyrados\WebExplorer\WebExplorer;
 use Nyrados\Utils\File\File;
@@ -14,6 +15,8 @@ use RuntimeException;
 
 abstract class AbstractMiddleware implements MiddlewareInterface
 {
+    use InvokeableMiddlewareTrait;
+
     protected static $params = [];
     protected static $method = 'POST';
 
@@ -52,13 +55,13 @@ abstract class AbstractMiddleware implements MiddlewareInterface
 
         $body->rewind();
 
-        if (strtoupper($request->getMethod()) !== self::$method) {
+        if (strtoupper($request->getMethod()) !== static::$method) {
             return $this->error($this->response, ['error' => 'invalid_method'])
                 ->withStatus(405)
-                ->withHeader('Allow', self::$method);
+                ->withHeader('Allow', static::$method);
         }
 
-        $param = self::$method === 'GET'
+        $param = static::$method === 'GET'
             ? $request->getQueryParams()
             : $request->getParsedBody()
         ;

@@ -11,6 +11,7 @@ use Nyrados\WebExplorer\Middleware\DirectoryList;
 use Nyrados\WebExplorer\Middleware\DownloadFile;
 use Nyrados\WebExplorer\Middleware\FileView;
 use Nyrados\WebExplorer\Middleware\Rename;
+use Nyrados\WebExplorer\Middleware\WebExplorerMiddleware;
 use Nyrados\WebExplorer\WebExplorer;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

@@ -13,4 +13,5 @@ interface MiddlewareSelectorInterface
      * @return MiddlewareInterface
      */
     public function selectMiddleware(ServerRequestInterface $request): MiddlewareInterface;
+
 }
