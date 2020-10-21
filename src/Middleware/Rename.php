@@ -10,12 +10,9 @@ class Rename extends AbstractMiddleware
 
     public function run(File $file, array $params = [])
     {        
-
         $dest = $this->getAbsoluteFile($params['to']);
         $dest->assertNotExistance();
         
         $file->rename($dest->getPath());
-
-        return [];
     }
 }

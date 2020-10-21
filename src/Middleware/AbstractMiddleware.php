@@ -7,6 +7,7 @@ use Nyrados\Utils\File\Exception\FileException;
 use Nyrados\WebExplorer\WebExplorer;
 use Nyrados\Utils\File\File;
 use Nyrados\Utils\File\Path;
+use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -67,39 +68,41 @@ abstract class AbstractMiddleware implements MiddlewareInterface
         ;
 
         foreach (array_merge(static::$params, ['file']) as $name) {
-
             if (!isset($param[$name])) {
                 return $this->error($this->response, ['error' => 'missing_parameter'])
                     ->withStatus(422);
             }
         }
+
         $file = $this->getAbsoluteFile($param['file']);
 
         try {
-            $runResponse = $this->run($file, $param);
+            return $this->convertRunResponse($this->run($file, $param));
         } catch (FileException $e) {
             return $this->error($this->response, $this->handleFileException($e, $param['file']));
         }
-        
+    }
 
-        if (is_array($runResponse)) {
+    private function convertRunResponse($value): ResponseInterface
+    {
+        if ($value instanceof ResponseInterface) {
+            return $value;
+        }
+
+        if (is_array($value)) {
             $body = $this->response->getBody();
             $body->rewind();
-            $body->write(json_encode($runResponse, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
+            $body->write(json_encode($value, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
             
             return $this->response
                 ->withBody($body)
                 ->withHeader('Content-Type', 'application/json');
         }
 
-        if ($runResponse instanceof ResponseInterface) {
-            return $runResponse;
-        }
-
-        throw new RuntimeException(static::class . '::run() must return an array or an response');
+        return $this->response;
     }
 
-    protected function getAbsoluteFile(string $path)
+    protected function getAbsoluteFile(string $path): File
     {
         $file = new Path(urldecode($path));
     
@@ -134,7 +137,7 @@ abstract class AbstractMiddleware implements MiddlewareInterface
      *
      * @param File $file
      * @param array<string> $params
-     * @return ResponseInterface|array<mixed>
+     * @return ResponseInterface|array<mixed>|void
      */
     abstract public function run(File $file, array $params = []);
 }

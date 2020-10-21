@@ -13,7 +13,5 @@ class Copy extends AbstractMiddleware
         $dest->assertNotExistance();
         
         $file->copy($dest->getPath());
-
-        return [];
     }
 }

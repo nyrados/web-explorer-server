@@ -10,7 +10,5 @@ class CreateDir extends AbstractMiddleware
     {
         $file->assertNotExistance();
         $file->createDirIfNotExists();
-
-        return [];
     }
 }

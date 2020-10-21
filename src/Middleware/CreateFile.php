@@ -10,7 +10,5 @@ class CreateFile extends AbstractMiddleware
     {
         $file->assertNotExistance();
         $file->createFileIfNotExitst();
-
-        return [];
     }
 }

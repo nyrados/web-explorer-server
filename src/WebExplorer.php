@@ -19,6 +19,7 @@ use Nyrados\Utils\File\Exception\FileAlreadyExistsException;
 use Nyrados\Http\Utils\Factory\Guzzle\IncomingRequestFactory;
 use Nyrados\WebExplorer\Middleware\Selector\QueryActionSelector;
 use Nyrados\WebExplorer\Middleware\Selector\MiddlewareSelectorInterface;
+use Psr\Http\Message\ResponseFactoryInterface;
 
 class WebExplorer implements MiddlewareInterface
 {
@@ -72,16 +73,12 @@ class WebExplorer implements MiddlewareInterface
     public function run(ServerRequestInterface $request = null): void
     {
         $request = $request ?? $request = $this->incomingRequestFactory->createIncomingRequest();
+        $response = $this($request, $this->responseFactory->createResponse());
 
-        $dumper = new ResponseDumper($this($request, $this->responseFactory->createResponse()));
+        $dumper = new ResponseDumper($response);
         $dumper->dump();
     }
-
-    public function asTarget(File $file): File
-    {
-        return $file;
-    }
-
+    
     public function getBaseFile()
     {
         return $this->file;
